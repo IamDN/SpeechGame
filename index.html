@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Krmení zvířátka – Hra s písmenky</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Úvodní překrytí pro odemčení audia a TTS na mobilních zařízeních -->
+  <div id="start-overlay" class="overlay">
+    <div class="overlay-card">
+      <div class="intro-avatar">🐶</div>
+      <h1>Ahoj, kamaráde!</h1>
+      <p>Pejsek má velký hlad na písmenka. Pomůžeš mu je najít a nakrmit ho?</p>
+      <button id="start-btn" class="btn btn-primary" type="button">
+        <span>Začít hrát! 🎮</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Překrytí při dokončení kola -->
+  <div id="win-overlay" class="overlay hidden">
+    <div class="overlay-card win-card">
+      <div class="win-avatar">🎉🐶🎉</div>
+      <h2 id="win-title">Výborně!</h2>
+      <p id="win-text">Všechna písmenka jsi zvládl na jedničku!</p>
+      <button id="next-level-btn" class="btn btn-primary" type="button">
+        <span>Další kolo ▶</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Hlavní herní plocha -->
+  <main class="game-container">
+    <!-- Horní lišta se stavem a ovládáním -->
+    <header class="game-header">
+      <div class="level-badge" id="level-indicator">Kolo 1: Samohlásky</div>
+      <div class="controls">
+        <button id="sound-btn" class="icon-btn" title="Zopakovat přání zvířátka" aria-label="Zopakovat přání">🔊</button>
+        <button id="restart-btn" class="icon-btn" title="Hrát od začátku" aria-label="Restartovat hru">🔄</button>
+      </div>
+    </header>
+
+    <!-- Horní část: Zvířátko a mluvící bublina -->
+    <section class="animal-section">
+      <!-- Mluvící bublina s nápovědou -->
+      <div class="speech-bubble" id="speech-bubble" role="status">
+        <span class="bubble-prompt">Já chci...</span>
+        <span class="bubble-target" id="bubble-target">?</span>
+        <span class="bubble-name" id="bubble-name"></span>
+      </div>
+
+      <!-- Kontejner zvířátka (kliknutím zvíře promluví) -->
+      <div class="animal-wrapper" id="animal-btn" role="button" tabindex="0" title="Klikni na mě a já ti řeknu, co chci!">
+        <!-- Placeholder obrázku/emotikonu zvířátka, snadno zaměnitelný za <img> -->
+        <div class="animal-avatar" id="animal-avatar">
+          <span class="animal-emoji" id="animal-emoji">🐶</span>
+        </div>
+        <div class="animal-shadow"></div>
+      </div>
+    </section>
+
+    <!-- Střední část: Drop zóna (miska na krmení) -->
+    <section class="drop-section">
+      <div class="drop-zone" id="drop-zone" aria-label="Miska pro vhození písmenka">
+        <div class="bowl-icon">🥣</div>
+        <span class="drop-label">Sem přetáhni písmenko</span>
+      </div>
+    </section>
+
+    <!-- Dolní část: Nabídka písmenek k přetažení -->
+    <section class="letters-section">
+      <div class="letters-rack" id="letters-rack" aria-label="Nabídka písmenek">
+        <!-- Písmenka se dynamicky vykreslují přes JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- Konfetový canvas pro oslavu -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
