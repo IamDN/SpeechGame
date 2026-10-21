@@ -80,16 +80,15 @@ body {
 
 .stars-badge {
   background: #ffffff;
-  padding: 6px 14px;
+  padding: 4px 10px;
+  min-height: 40px;
+  min-width: 44px;
   border-radius: var(--border-radius-md);
-  font-weight: 700;
-  font-size: 1.05rem;
-  color: #d9480f;
   box-shadow: var(--shadow-soft);
   border: 3px solid #ffe066;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -97,9 +96,29 @@ body {
   animation: starPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.star-icon {
-  font-size: 1.25rem;
+.stars-list {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+  max-width: 180px;
+}
+
+.star-item {
+  font-size: 1.2rem;
   line-height: 1;
+  display: inline-block;
+  filter: drop-shadow(0 2px 4px rgba(255, 212, 59, 0.4));
+}
+
+.star-item.empty {
+  color: #ced4da;
+  font-size: 1.15rem;
+  filter: none;
+}
+
+.star-item.new-star {
+  animation: starDropIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .controls {
@@ -289,6 +308,52 @@ body {
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
+}
+
+/* Sloty pro slova ve slovních kolech */
+.word-slots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.word-slots.hidden {
+  display: none;
+}
+
+.word-slot {
+  width: 44px;
+  height: 44px;
+  border: 2px dashed #ffa8a8;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #adb5bd;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.word-slot.active {
+  border-color: #ffd43b;
+  border-style: solid;
+  background: #fff9db;
+  color: #d9480f;
+  box-shadow: 0 0 0 3px rgba(255, 212, 59, 0.45);
+  transform: scale(1.08);
+}
+
+.word-slot.filled {
+  border-color: #40c057;
+  border-style: solid;
+  background: #ebfbee;
+  color: #2b8a3e;
+  box-shadow: 0 4px 10px rgba(64, 192, 87, 0.25);
+  animation: popIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .drop-zone.drag-over {
@@ -554,6 +619,37 @@ body {
   animation: starSpin 1s ease-in-out infinite alternate;
 }
 
+.win-stars-collection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  min-height: 40px;
+  padding: 8px 14px;
+  background: rgba(255, 243, 191, 0.45);
+  border-radius: var(--border-radius-md);
+}
+
+.win-stars-collection .star-item {
+  font-size: 1.8rem;
+}
+
+@keyframes starDropIn {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.4) rotate(15deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
 /* =========================================================
    Responzivita: Horizontální displeje (tablety v landscape)
    a obrazovky s menší výškou
@@ -621,6 +717,13 @@ body {
     width: 58px;
     height: 58px;
     font-size: 1.9rem;
+  }
+
+  .word-slot {
+    width: 36px;
+    height: 36px;
+    font-size: 1.25rem;
+    border-radius: 10px;
   }
 }
 

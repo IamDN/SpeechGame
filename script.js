@@ -11,12 +11,12 @@
  * Fonetická mapa pro přirozenou českou výslovnost písmen
  */
 const PRONUNCIATION_MAP = {
-  'A': 'A', 'E': 'E', 'I': 'I', 'O': 'O', 'U': 'U',
+  'A': 'A', 'E': 'E', 'I': 'I', 'O': 'O', 'U': 'U', 'Ů': 'U',
   'B': 'Bé', 'C': 'Cé', 'Č': 'Čé', 'D': 'Dé', 'Ď': 'Ďé',
   'F': 'Ef', 'G': 'Gé', 'H': 'Há', 'CH': 'Chá',
   'J': 'Jé', 'K': 'Ká', 'L': 'El', 'M': 'Em',
-  'N': 'En', 'Ň': 'Eň', 'P': 'Pé', 'R': 'Er',
-  'Ř': 'Eř', 'S': 'Es', 'Š': 'Eš', 'T': 'Té',
+  'N': 'En', 'Ň': 'ň', 'P': 'Pé', 'R': 'Er',
+  'Ř': 'Ř', 'S': 'Es', 'Š': 'Š', 'T': 'Té',
   'Ť': 'Ťé', 'V': 'Vé', 'W': 'Dvojité vé', 'X': 'Iks',
   'Y': 'Ypsilon', 'Z': 'Zet', 'Ž': 'Žet'
 };
@@ -52,6 +52,7 @@ const LETTER_NAMES = {
   'T': 'Tomášek',
   'Ť': 'Ťapka',
   'U': 'Uršulka',
+  'Ů': 'Ufoun',
   'V': 'Verunka',
   'W': 'Wendy',
   'X': 'Xenie',
@@ -61,33 +62,146 @@ const LETTER_NAMES = {
 };
 
 /**
- * Seznam kol. Každé kolo má název, zvířátko a seznam písmenek.
- * Lze velmi snadno rozšiřovat o další kola a nová písmena.
+ * Seznam kol:
+ * 1. Fáze: Kompletní česká abeceda (všech 33 písmen)
+ * 2. Fáze: První jednoduchá slova (skládání písmenek do slov: PES, MAMA, TATA, MASO atd.)
  */
 const LEVELS = [
+  // --- 1. FÁZE: VŠECHNA PÍSMENA ČESKÉ ABECEDY ---
   {
     name: '1. Kolo: Samohlásky',
+    type: 'letters',
     animalEmoji: '🐶',
     animalName: 'pejsek',
     letters: ['A', 'E', 'I', 'O', 'U']
   },
   {
     name: '2. Kolo: První souhlásky',
+    type: 'letters',
     animalEmoji: '🐱',
     animalName: 'kočička',
     letters: ['M', 'L', 'S', 'P', 'T']
   },
   {
     name: '3. Kolo: Zvířecí abeceda',
+    type: 'letters',
     animalEmoji: '🐻',
     animalName: 'medvídek',
     letters: ['B', 'D', 'K', 'R', 'V']
   },
   {
-    name: '4. Kolo: Písmenka s háčky',
+    name: '4. Kolo: Lesní písmenka',
+    type: 'letters',
+    animalEmoji: '🦊',
+    animalName: 'lištička',
+    letters: ['J', 'N', 'Z', 'H', 'F']
+  },
+  {
+    name: '5. Kolo: Písmenka u potoka',
+    type: 'letters',
+    animalEmoji: '🐸',
+    animalName: 'žabička',
+    letters: ['C', 'G', 'CH', 'Y', 'W']
+  },
+  {
+    name: '6. Kolo: Písmenka s háčky I',
+    type: 'letters',
     animalEmoji: '🦁',
     animalName: 'lvíček',
-    letters: ['Č', 'Š', 'Ž', 'Ř', 'Ď']
+    letters: ['Č', 'Š', 'Ž', 'Ř']
+  },
+  {
+    name: '7. Kolo: Písmenka s háčky II',
+    type: 'letters',
+    animalEmoji: '🐼',
+    animalName: 'panda',
+    letters: ['Ď', 'Ť', 'Ň', 'Ů']
+  },
+
+  // --- 2. FÁZE: PRVNÍ JEDNODUCHÁ SLOVA ---
+  {
+    name: '8. Kolo: Slovo PES',
+    type: 'word',
+    word: 'PES',
+    spokenWord: 'pes',
+    animalEmoji: '🐶',
+    animalName: 'pejsek',
+    letters: ['P', 'E', 'S']
+  },
+  {
+    name: '9. Kolo: Slovo MÁMA',
+    type: 'word',
+    word: 'MAMA',
+    displayWord: 'MÁMA',
+    spokenWord: 'máma',
+    animalEmoji: '🐱',
+    animalName: 'kočička',
+    letters: ['M', 'A', 'M', 'A']
+  },
+  {
+    name: '10. Kolo: Slovo TÁTA',
+    type: 'word',
+    word: 'TATA',
+    displayWord: 'TÁTA',
+    spokenWord: 'táta',
+    animalEmoji: '🐻',
+    animalName: 'medvídek',
+    letters: ['T', 'A', 'T', 'A']
+  },
+  {
+    name: '11. Kolo: Slovo MASO',
+    type: 'word',
+    word: 'MASO',
+    spokenWord: 'maso',
+    animalEmoji: '🦁',
+    animalName: 'lvíček',
+    letters: ['M', 'A', 'S', 'O']
+  },
+  {
+    name: '12. Kolo: Slovo RUKA',
+    type: 'word',
+    word: 'RUKA',
+    spokenWord: 'ruka',
+    animalEmoji: '🐼',
+    animalName: 'panda',
+    letters: ['R', 'U', 'K', 'A']
+  },
+  {
+    name: '13. Kolo: Slovo NOHA',
+    type: 'word',
+    word: 'NOHA',
+    spokenWord: 'noha',
+    animalEmoji: '🐸',
+    animalName: 'žabička',
+    letters: ['N', 'O', 'H', 'A']
+  },
+  {
+    name: '14. Kolo: Slovo LES',
+    type: 'word',
+    word: 'LES',
+    spokenWord: 'les',
+    animalEmoji: '🦊',
+    animalName: 'lištička',
+    letters: ['L', 'E', 'S']
+  },
+  {
+    name: '15. Kolo: Slovo DŮM',
+    type: 'word',
+    word: 'DUM',
+    displayWord: 'DŮM',
+    spokenWord: 'dům',
+    animalEmoji: '🐭',
+    animalName: 'myška',
+    letters: ['D', 'U', 'M']
+  },
+  {
+    name: '16. Kolo: Slovo VODA',
+    type: 'word',
+    word: 'VODA',
+    spokenWord: 'voda',
+    animalEmoji: '🐘',
+    animalName: 'slůně',
+    letters: ['V', 'O', 'D', 'A']
   }
 ];
 
@@ -144,7 +258,7 @@ class SpeechManager {
     const sound = this.getLetterSound(letter);
     const name = this.getLetterName(letter);
     if (name) {
-      return `${sound} jako ${name}`;
+      return `${sound}, jako ${name}`;
     }
     return sound;
   }
@@ -199,14 +313,18 @@ class LetterGame {
     // Odkazy na DOM elementy
     this.levelIndicator = document.getElementById('level-indicator');
     this.starsBadge = document.getElementById('stars-badge');
-    this.starsCountElement = document.getElementById('stars-count');
+    this.starsListElement = document.getElementById('stars-list');
+    this.winStarsCollection = document.getElementById('win-stars-collection');
     this.animalBtn = document.getElementById('animal-btn');
     this.animalAvatar = document.getElementById('animal-avatar');
     this.animalEmoji = document.getElementById('animal-emoji');
+    this.bubblePrompt = document.querySelector('.bubble-prompt');
     this.bubbleTarget = document.getElementById('bubble-target');
     this.bubbleName = document.getElementById('bubble-name');
     this.speechBubble = document.getElementById('speech-bubble');
     this.dropZone = document.getElementById('drop-zone');
+    this.dropLabel = document.getElementById('drop-label');
+    this.wordSlots = document.getElementById('word-slots');
     this.lettersRack = document.getElementById('letters-rack');
     this.startOverlay = document.getElementById('start-overlay');
     this.startBtn = document.getElementById('start-btn');
@@ -225,6 +343,11 @@ class LetterGame {
     } catch (_) {}
     this.updateStarsDisplay(false);
 
+    // Stav slovních kol
+    this.isWordLevel = false;
+    this.currentWordLetters = [];
+    this.currentWordIndex = 0;
+
     // Drag & drop stav
     this.activeDrag = null;
 
@@ -232,13 +355,52 @@ class LetterGame {
   }
 
   updateStarsDisplay(animate = false) {
-    if (this.starsCountElement) {
-      this.starsCountElement.textContent = this.stars;
+    if (!this.starsListElement) return;
+
+    this.starsListElement.innerHTML = '';
+    if (this.stars === 0) {
+      const emptySpan = document.createElement('span');
+      emptySpan.className = 'star-item empty';
+      emptySpan.title = 'Zatím žádná hvězdička';
+      emptySpan.textContent = '☆';
+      this.starsListElement.appendChild(emptySpan);
+    } else {
+      for (let i = 0; i < this.stars; i++) {
+        const span = document.createElement('span');
+        span.className = 'star-item';
+        if (animate && i === this.stars - 1) {
+          span.classList.add('new-star');
+        }
+        span.textContent = '⭐';
+        this.starsListElement.appendChild(span);
+      }
     }
+
     if (animate && this.starsBadge) {
       this.starsBadge.classList.remove('star-pop');
       void this.starsBadge.offsetWidth;
       this.starsBadge.classList.add('star-pop');
+    }
+  }
+
+  shuffleArray(arr) {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  }
+
+  renderWordSlots(word) {
+    if (!this.wordSlots) return;
+    this.wordSlots.innerHTML = '';
+    for (let i = 0; i < word.length; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'word-slot' + (i === 0 ? ' active' : '');
+      slot.dataset.index = i;
+      slot.textContent = '_';
+      this.wordSlots.appendChild(slot);
     }
   }
 
@@ -289,10 +451,37 @@ class LetterGame {
       this.animalAvatar.innerHTML = `<span class="animal-emoji" id="animal-emoji">${level.animalEmoji || '🐶'}</span>`;
     }
 
-    // Kopie písmen pro aktuální kolo
-    this.remainingLetters = [...level.letters];
-    this.renderRack(level.letters);
-    this.pickNextTarget();
+    if (level.type === 'word') {
+      this.isWordLevel = true;
+      this.currentWord = level.word;
+      this.currentWordLetters = level.word.split('');
+      this.currentWordIndex = 0;
+
+      if (this.wordSlots) {
+        this.wordSlots.classList.remove('hidden');
+        this.renderWordSlots(level.word);
+      }
+      if (this.dropLabel) {
+        this.dropLabel.textContent = `Slož slovo ${level.displayWord || level.word}:`;
+      }
+
+      // Zamíchat písmenka v regálu, aby dítě muselo hledat správné pořadí
+      const shuffledLetters = this.shuffleArray(level.letters);
+      this.renderRack(shuffledLetters);
+      this.pickNextTarget();
+    } else {
+      this.isWordLevel = false;
+      if (this.wordSlots) {
+        this.wordSlots.classList.add('hidden');
+      }
+      if (this.dropLabel) {
+        this.dropLabel.textContent = 'Sem přetáhni písmenko';
+      }
+
+      this.remainingLetters = [...level.letters];
+      this.renderRack(level.letters);
+      this.pickNextTarget();
+    }
   }
 
   renderRack(letters) {
@@ -318,34 +507,81 @@ class LetterGame {
   }
 
   pickNextTarget() {
-    if (this.remainingLetters.length === 0) {
-      this.handleLevelComplete();
-      return;
+    const level = LEVELS[this.currentLevelIndex];
+
+    if (this.isWordLevel) {
+      if (this.currentWordIndex >= this.currentWordLetters.length) {
+        this.handleLevelComplete();
+        return;
+      }
+
+      this.targetLetter = this.currentWordLetters[this.currentWordIndex];
+      if (this.bubblePrompt) {
+        this.bubblePrompt.textContent = `Slovo ${level.displayWord || level.word}:`;
+      }
+      this.bubbleTarget.textContent = this.targetLetter;
+      const name = speechManager.getLetterName(this.targetLetter);
+      this.bubbleName.textContent = name ? `jako ${name}` : '';
+
+      // Aktualizace stavu slotů slova
+      if (this.wordSlots) {
+        const slots = this.wordSlots.querySelectorAll('.word-slot');
+        slots.forEach((s, idx) => {
+          if (idx < this.currentWordIndex) {
+            s.className = 'word-slot filled';
+          } else if (idx === this.currentWordIndex) {
+            s.className = 'word-slot active';
+          } else {
+            s.className = 'word-slot';
+          }
+        });
+      }
+
+      setTimeout(() => {
+        this.promptTarget();
+      }, 350);
+    } else {
+      if (this.bubblePrompt) {
+        this.bubblePrompt.textContent = 'Já chci...';
+      }
+      if (this.remainingLetters.length === 0) {
+        this.handleLevelComplete();
+        return;
+      }
+
+      // Náhodný výběr jednoho ze zbývajících písmen
+      const randomIndex = Math.floor(Math.random() * this.remainingLetters.length);
+      this.targetLetter = this.remainingLetters[randomIndex];
+      this.bubbleTarget.textContent = this.targetLetter;
+      const name = speechManager.getLetterName(this.targetLetter);
+      this.bubbleName.textContent = name ? `jako ${name}` : '';
+
+      setTimeout(() => {
+        this.promptTarget();
+      }, 350);
     }
-
-    // Náhodný výběr jednoho ze zbývajících písmen
-    const randomIndex = Math.floor(Math.random() * this.remainingLetters.length);
-    this.targetLetter = this.remainingLetters[randomIndex];
-    this.bubbleTarget.textContent = this.targetLetter;
-    const name = speechManager.getLetterName(this.targetLetter);
-    this.bubbleName.textContent = name ? `jako ${name}` : '';
-
-    // Zvíře promluví a řekne, co chce
-    setTimeout(() => {
-      this.promptTarget();
-    }, 350);
   }
 
   promptTarget() {
     if (!this.targetLetter) return;
     const desc = speechManager.getLetterDescription(this.targetLetter);
+    const level = LEVELS[this.currentLevelIndex];
+
     // Hravá animace bubliny
     this.bubbleTarget.style.transform = 'scale(1.2)';
     setTimeout(() => {
       this.bubbleTarget.style.transform = '';
     }, 250);
 
-    speechManager.speak(`Já chci... ${desc}`);
+    if (this.isWordLevel) {
+      if (this.currentWordIndex === 0) {
+        speechManager.speak(`Slovo ${level.spokenWord || level.word}! Já chci... ${desc}`);
+      } else {
+        speechManager.speak(`A teď... ${desc}`);
+      }
+    } else {
+      speechManager.speak(`Já chci... ${desc}`);
+    }
   }
 
 
@@ -458,6 +694,7 @@ class LetterGame {
     const { clone, card, letter } = drag;
     const isCorrect = (letter === this.targetLetter);
     const letterDesc = speechManager.getLetterDescription(letter);
+    const level = LEVELS[this.currentLevelIndex];
 
     if (isCorrect) {
       clone.remove();
@@ -467,19 +704,46 @@ class LetterGame {
       this.dropZone.classList.add('success');
       this.animalAvatar.classList.add('chewing');
 
-      this.remainingLetters = this.remainingLetters.filter(l => l !== letter);
+      if (this.isWordLevel) {
+        // Vyplnit aktuální slot slova
+        if (this.wordSlots) {
+          const activeSlot = this.wordSlots.querySelector(`.word-slot[data-index="${this.currentWordIndex}"]`);
+          if (activeSlot) {
+            activeSlot.textContent = letter;
+            activeSlot.className = 'word-slot filled';
+          }
+        }
+        this.currentWordIndex++;
 
-      // Zvíře: "Mňam mňam mňam, mám rád [písmenko jako jméno]"
-      speechManager.speak(`Mňam mňam mňam, mám rád ${letterDesc}`, () => {
-        this.dropZone.classList.remove('success');
-        this.animalAvatar.classList.remove('chewing');
-        this.pickNextTarget();
-      });
+        // Je celé slovo hotové?
+        if (this.currentWordIndex >= this.currentWordLetters.length) {
+          speechManager.speak(`Mňam mňam mňam, mám rád ${letterDesc}! Výborně, slovo ${level.spokenWord || level.word} je hotové!`, () => {
+            this.dropZone.classList.remove('success');
+            this.animalAvatar.classList.remove('chewing');
+            this.handleLevelComplete();
+          });
+          return;
+        }
+
+        // Další písmeno ve slově
+        speechManager.speak(`Mňam mňam mňam, mám rád ${letterDesc}`, () => {
+          this.dropZone.classList.remove('success');
+          this.animalAvatar.classList.remove('chewing');
+          this.pickNextTarget();
+        });
+      } else {
+        this.remainingLetters = this.remainingLetters.filter(l => l !== letter);
+
+        speechManager.speak(`Mňam mňam mňam, mám rád ${letterDesc}`, () => {
+          this.dropZone.classList.remove('success');
+          this.animalAvatar.classList.remove('chewing');
+          this.pickNextTarget();
+        });
+      }
     } else {
       this.dropZone.classList.add('wrong');
       this.animalAvatar.classList.add('disgusted');
 
-      // Zvíře: "Fuj, to je [písmenko jako jméno]"
       speechManager.speak(`Fuj, to je ${letterDesc}`, () => {
         this.dropZone.classList.remove('wrong');
         this.animalAvatar.classList.remove('disgusted');
@@ -492,6 +756,9 @@ class LetterGame {
   handleLevelComplete() {
     this.bubbleTarget.textContent = '⭐';
     this.bubbleName.textContent = '';
+    if (this.bubblePrompt) {
+      this.bubblePrompt.textContent = 'Výborně!';
+    }
     this.animalAvatar.classList.add('happy');
 
     // Zvýšení počtu hvězdiček
@@ -500,6 +767,20 @@ class LetterGame {
       localStorage.setItem('letterGame_stars', this.stars.toString());
     } catch (_) {}
     this.updateStarsDisplay(true);
+
+    // Zobrazení hvězdiček i ve vítězném okně
+    if (this.winStarsCollection) {
+      this.winStarsCollection.innerHTML = '';
+      for (let i = 0; i < this.stars; i++) {
+        const span = document.createElement('span');
+        span.className = 'star-item';
+        if (i === this.stars - 1) {
+          span.classList.add('new-star');
+        }
+        span.textContent = '⭐';
+        this.winStarsCollection.appendChild(span);
+      }
+    }
 
     // Ohlášení úspěchu a získání hvězdičky
     setTimeout(() => {
@@ -514,7 +795,7 @@ class LetterGame {
       const nextLevel = LEVELS[(this.currentLevelIndex + 1) % LEVELS.length];
 
       this.winTitle.textContent = `Skvěle, ${level.name} je hotovo!`;
-      this.winText.textContent = `Zvířátko je najezené a máš už celkem ${this.stars} ⭐! Chceš zkusit ${nextLevel.name}?`;
+      this.winText.textContent = `Zvířátko je najezené a spokojené. Chceš zkusit ${nextLevel.name}?`;
       this.winOverlay.classList.remove('hidden');
     }, 1400);
   }

@@ -32,6 +32,7 @@
         <span class="win-star-icon">⭐</span>
         <span class="win-star-text">+1 Hvězdička!</span>
       </div>
+      <div class="win-stars-collection" id="win-stars-collection" aria-label="Nasbírané hvězdičky"></div>
       <p id="win-text">Všechna písmenka jsi zvládl na jedničku!</p>
       <button id="next-level-btn" class="btn btn-primary" type="button">
         <span>Další kolo ▶</span>
@@ -45,9 +46,8 @@
     <header class="game-header">
       <div class="header-status">
         <div class="level-badge" id="level-indicator">Kolo 1: Samohlásky</div>
-        <div class="stars-badge" id="stars-badge" title="Počet získaných hvězdiček" aria-label="Získané hvězdičky">
-          <span class="star-icon">⭐</span>
-          <span class="stars-count" id="stars-count">0</span>
+        <div class="stars-badge" id="stars-badge" title="Získané hvězdičky" aria-label="Získané hvězdičky">
+          <div class="stars-list" id="stars-list"></div>
         </div>
       </div>
       <div class="controls">
@@ -79,7 +79,9 @@
     <section class="drop-section">
       <div class="drop-zone" id="drop-zone" aria-label="Miska pro vhození písmenka">
         <div class="bowl-icon">🥣</div>
-        <span class="drop-label">Sem přetáhni písmenko</span>
+        <span class="drop-label" id="drop-label">Sem přetáhni písmenko</span>
+        <!-- Sloty pro skládání slov ve slovních kolech -->
+        <div class="word-slots hidden" id="word-slots" aria-label="Složené slovo"></div>
       </div>
     </section>
 
