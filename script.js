@@ -11,7 +11,7 @@
  * Fonetická mapa pro přirozenou českou výslovnost písmen
  */
 const PRONUNCIATION_MAP = {
-  'A': 'Á', 'E': 'É', 'I': 'Í', 'O': 'Ó', 'U': 'Ú',
+  'A': 'A', 'E': 'E', 'I': 'I', 'O': 'O', 'U': 'U',
   'B': 'Bé', 'C': 'Cé', 'Č': 'Čé', 'D': 'Dé', 'Ď': 'Ďé',
   'F': 'Ef', 'G': 'Gé', 'H': 'Há', 'CH': 'Chá',
   'J': 'Jé', 'K': 'Ká', 'L': 'El', 'M': 'Em',
