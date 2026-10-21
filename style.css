@@ -38,10 +38,11 @@ body {
 /* Hlavní kontejner hry */
 .game-container {
   width: 100%;
-  max-width: 600px;
-  height: 100vh;
-  max-height: 900px;
-  padding: 16px 20px;
+  max-width: 620px;
+  height: 100%;
+  height: 100dvh;
+  max-height: 840px;
+  padding: 12px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -56,17 +57,49 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
 .level-badge {
   background: #ffffff;
-  padding: 8px 18px;
+  padding: 6px 14px;
   border-radius: var(--border-radius-md);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #ff6b6b;
   box-shadow: var(--shadow-soft);
   border: 3px solid #ffe3e3;
+}
+
+.stars-badge {
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: var(--border-radius-md);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #d9480f;
+  box-shadow: var(--shadow-soft);
+  border: 3px solid #ffe066;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stars-badge.star-pop {
+  animation: starPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.star-icon {
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 .controls {
@@ -108,10 +141,10 @@ body {
 
 .speech-bubble {
   background: #ffffff;
-  padding: 12px 24px;
+  padding: 8px 18px;
   border-radius: var(--border-radius-md);
   box-shadow: var(--shadow-strong);
-  font-size: 1.35rem;
+  font-size: 1.2rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
@@ -120,7 +153,7 @@ body {
   max-width: 90vw;
   gap: 8px;
   position: relative;
-  margin-bottom: 14px;
+  margin-bottom: 8px;
   border: 3px solid #ffe066;
   animation: floatBubble 3s ease-in-out infinite;
   cursor: pointer;
@@ -166,8 +199,8 @@ body {
 }
 
 .animal-avatar {
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   background: #fff;
   border-radius: 50%;
   display: flex;
@@ -188,17 +221,17 @@ body {
 }
 
 .animal-emoji {
-  font-size: 5rem;
+  font-size: 4.2rem;
   line-height: 1;
   display: block;
 }
 
 .animal-shadow {
-  width: 110px;
-  height: 14px;
+  width: 95px;
+  height: 12px;
   background: rgba(0, 0, 0, 0.12);
   border-radius: 50%;
-  margin-top: 8px;
+  margin-top: 6px;
   filter: blur(2px);
 }
 
@@ -230,7 +263,7 @@ body {
 .drop-zone {
   width: 90%;
   max-width: 380px;
-  min-height: 110px;
+  min-height: 90px;
   background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -240,19 +273,19 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 12px;
+  gap: 4px;
+  padding: 10px;
   box-shadow: var(--shadow-soft);
   transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .drop-zone .bowl-icon {
-  font-size: 2.4rem;
+  font-size: 2rem;
   line-height: 1;
 }
 
 .drop-zone .drop-label {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: var(--text-muted);
   text-align: center;
@@ -262,7 +295,7 @@ body {
   background: #fff9db;
   border-color: #ffd43b;
   border-style: solid;
-  transform: scale(1.06);
+  transform: scale(1.05);
   box-shadow: 0 16px 36px rgba(255, 212, 59, 0.4);
 }
 
@@ -270,7 +303,7 @@ body {
   background: #d3f9d8;
   border-color: #40c057;
   border-style: solid;
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .drop-zone.wrong {
@@ -283,33 +316,33 @@ body {
 /* Sekce s písmenky */
 .letters-section {
   width: 100%;
-  padding-bottom: 12px;
+  padding-bottom: 8px;
 }
 
 .letters-rack {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
-  min-height: 95px;
+  gap: 12px;
+  min-height: 80px;
   align-items: center;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  padding: 16px;
+  padding: 12px;
   border-radius: var(--border-radius-lg);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .letter-card {
-  width: 72px;
-  height: 72px;
+  width: 66px;
+  height: 66px;
   background: linear-gradient(145deg, #ffffff, #f1f3f5);
   border-radius: var(--border-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   font-weight: 700;
   color: #3b5bdb;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12), 0 3px 0 #ced4da;
@@ -489,12 +522,183 @@ body {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Responzivita pro menší displeje */
-@media (max-height: 680px) {
-  .game-container { padding: 10px 14px; }
-  .animal-avatar { width: 105px; height: 105px; }
-  .animal-emoji { font-size: 3.6rem; }
-  .drop-zone { min-height: 80px; padding: 6px; }
-  .letter-card { width: 58px; height: 58px; font-size: 1.9rem; }
+@keyframes starPop {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.35) rotate(12deg); }
+  70% { transform: scale(0.95) rotate(-6deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes starSpin {
+  0% { transform: scale(1) rotate(-8deg); }
+  100% { transform: scale(1.25) rotate(12deg); }
+}
+
+.win-star-reward {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff9db;
+  border: 2px solid #ffd43b;
+  padding: 8px 18px;
+  border-radius: var(--border-radius-md);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #d9480f;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(255, 212, 59, 0.3);
+}
+
+.win-star-icon {
+  font-size: 1.5rem;
+  animation: starSpin 1s ease-in-out infinite alternate;
+}
+
+/* =========================================================
+   Responzivita: Horizontální displeje (tablety v landscape)
+   a obrazovky s menší výškou
+   ========================================================= */
+
+/* Horizontální tablet a širší orientace */
+@media (orientation: landscape) {
+  .game-container {
+    max-width: 780px;
+    padding: 8px 16px;
+    max-height: 100dvh;
+  }
+
+  .speech-bubble {
+    padding: 6px 14px;
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+  }
+
+  .bubble-target {
+    font-size: 1.35rem;
+    padding: 2px 10px;
+  }
+
+  .bubble-name {
+    font-size: 1rem;
+  }
+
+  .animal-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .animal-emoji {
+    font-size: 3.5rem;
+  }
+
+  .animal-shadow {
+    width: 80px;
+    height: 10px;
+    margin-top: 4px;
+  }
+
+  .drop-zone {
+    min-height: 72px;
+    padding: 6px 12px;
+    gap: 2px;
+  }
+
+  .drop-zone .bowl-icon {
+    font-size: 1.7rem;
+  }
+
+  .drop-zone .drop-label {
+    font-size: 0.9rem;
+  }
+
+  .letters-rack {
+    min-height: 70px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .letter-card {
+    width: 58px;
+    height: 58px;
+    font-size: 1.9rem;
+  }
+}
+
+/* Menší výška displeje (na výšku i na šířku) */
+@media (max-height: 750px) {
+  .game-container {
+    padding: 8px 14px;
+  }
+
+  .animal-avatar {
+    width: 95px;
+    height: 95px;
+  }
+
+  .animal-emoji {
+    font-size: 3.3rem;
+  }
+
+  .drop-zone {
+    min-height: 70px;
+    padding: 6px;
+  }
+
+  .letter-card {
+    width: 56px;
+    height: 56px;
+    font-size: 1.85rem;
+  }
+
+  .letters-rack {
+    padding: 8px;
+    gap: 10px;
+  }
+}
+
+/* Nízké horizontální displeje (např. mobil naležato) */
+@media (max-height: 560px) {
+  .game-container {
+    padding: 4px 10px;
+  }
+
+  .speech-bubble {
+    padding: 4px 10px;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .bubble-target {
+    font-size: 1.15rem;
+    padding: 1px 8px;
+  }
+
+  .animal-avatar {
+    width: 75px;
+    height: 75px;
+  }
+
+  .animal-emoji {
+    font-size: 2.6rem;
+  }
+
+  .animal-shadow {
+    display: none;
+  }
+
+  .drop-zone {
+    min-height: 55px;
+    padding: 4px 8px;
+  }
+
+  .drop-zone .bowl-icon {
+    font-size: 1.4rem;
+  }
+
+  .letter-card {
+    width: 48px;
+    height: 48px;
+    font-size: 1.6rem;
+  }
 }
 

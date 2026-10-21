@@ -28,6 +28,10 @@
     <div class="overlay-card win-card">
       <div class="win-avatar">🎉🐶🎉</div>
       <h2 id="win-title">Výborně!</h2>
+      <div class="win-star-reward">
+        <span class="win-star-icon">⭐</span>
+        <span class="win-star-text">+1 Hvězdička!</span>
+      </div>
       <p id="win-text">Všechna písmenka jsi zvládl na jedničku!</p>
       <button id="next-level-btn" class="btn btn-primary" type="button">
         <span>Další kolo ▶</span>
@@ -39,7 +43,13 @@
   <main class="game-container">
     <!-- Horní lišta se stavem a ovládáním -->
     <header class="game-header">
-      <div class="level-badge" id="level-indicator">Kolo 1: Samohlásky</div>
+      <div class="header-status">
+        <div class="level-badge" id="level-indicator">Kolo 1: Samohlásky</div>
+        <div class="stars-badge" id="stars-badge" title="Počet získaných hvězdiček" aria-label="Získané hvězdičky">
+          <span class="star-icon">⭐</span>
+          <span class="stars-count" id="stars-count">0</span>
+        </div>
+      </div>
       <div class="controls">
         <button id="sound-btn" class="icon-btn" title="Zopakovat přání zvířátka" aria-label="Zopakovat přání">🔊</button>
         <button id="restart-btn" class="icon-btn" title="Hrát od začátku" aria-label="Restartovat hru">🔄</button>

@@ -162,7 +162,7 @@ class SpeechManager {
       this.synth.cancel(); // Zruší jakoukoli běžící řeč, aby se nevrstvila
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'cs-CZ';
-      utterance.rate = 0.7;  // Mírně pomalejší tempo pro děti
+      utterance.rate = 0.8;  // Mírně pomalejší tempo pro děti
       utterance.pitch = 1.15; // Mírně vyšší, přátelský tón pro děti
 
       if (this.czechVoice) {
@@ -198,6 +198,8 @@ class LetterGame {
 
     // Odkazy na DOM elementy
     this.levelIndicator = document.getElementById('level-indicator');
+    this.starsBadge = document.getElementById('stars-badge');
+    this.starsCountElement = document.getElementById('stars-count');
     this.animalBtn = document.getElementById('animal-btn');
     this.animalAvatar = document.getElementById('animal-avatar');
     this.animalEmoji = document.getElementById('animal-emoji');
@@ -215,10 +217,29 @@ class LetterGame {
     this.soundBtn = document.getElementById('sound-btn');
     this.restartBtn = document.getElementById('restart-btn');
 
+    // Hvězdičkový systém (ukládá se do localStorage)
+    this.stars = 0;
+    try {
+      this.stars = parseInt(localStorage.getItem('letterGame_stars') || '0', 10);
+      if (isNaN(this.stars)) this.stars = 0;
+    } catch (_) {}
+    this.updateStarsDisplay(false);
+
     // Drag & drop stav
     this.activeDrag = null;
 
     this.bindEvents();
+  }
+
+  updateStarsDisplay(animate = false) {
+    if (this.starsCountElement) {
+      this.starsCountElement.textContent = this.stars;
+    }
+    if (animate && this.starsBadge) {
+      this.starsBadge.classList.remove('star-pop');
+      void this.starsBadge.offsetWidth;
+      this.starsBadge.classList.add('star-pop');
+    }
   }
 
   bindEvents() {
@@ -473,9 +494,16 @@ class LetterGame {
     this.bubbleName.textContent = '';
     this.animalAvatar.classList.add('happy');
 
-    // Ohlášení úspěchu a přechodu do dalšího kola
+    // Zvýšení počtu hvězdiček
+    this.stars++;
+    try {
+      localStorage.setItem('letterGame_stars', this.stars.toString());
+    } catch (_) {}
+    this.updateStarsDisplay(true);
+
+    // Ohlášení úspěchu a získání hvězdičky
     setTimeout(() => {
-      speechManager.speak('Super, jdeme do dalšího kola!');
+      speechManager.speak('Super, získal jsi hvězdičku! Jdeme do dalšího kola!');
     }, 300);
 
     launchConfetti();
@@ -486,7 +514,7 @@ class LetterGame {
       const nextLevel = LEVELS[(this.currentLevelIndex + 1) % LEVELS.length];
 
       this.winTitle.textContent = `Skvěle, ${level.name} je hotovo!`;
-      this.winText.textContent = `Zvířátko je spokojené a najezené. Chceš zkusit ${nextLevel.name}?`;
+      this.winText.textContent = `Zvířátko je najezené a máš už celkem ${this.stars} ⭐! Chceš zkusit ${nextLevel.name}?`;
       this.winOverlay.classList.remove('hidden');
     }, 1400);
   }
