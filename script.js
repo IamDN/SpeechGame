@@ -162,7 +162,7 @@ class SpeechManager {
       this.synth.cancel(); // Zruší jakoukoli běžící řeč, aby se nevrstvila
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = 'cs-CZ';
-      utterance.rate = 0.9;  // Mírně pomalejší tempo pro děti
+      utterance.rate = 0.7;  // Mírně pomalejší tempo pro děti
       utterance.pitch = 1.15; // Mírně vyšší, přátelský tón pro děti
 
       if (this.czechVoice) {
