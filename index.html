@@ -33,10 +33,39 @@
         <span class="win-star-text">+1 Hvězdička!</span>
       </div>
       <div class="win-stars-collection" id="win-stars-collection" aria-label="Nasbírané hvězdičky"></div>
+
+      <!-- Výzva k hlasitému přečtení pro slova a věty -->
+      <div class="read-aloud-banner hidden" id="read-aloud-banner">
+        <span class="read-aloud-icon">🗣️</span>
+        <div class="read-aloud-body">
+          <span class="read-aloud-label">Zkus to přečíst nahlas:</span>
+          <span class="read-aloud-text" id="read-aloud-text">PES</span>
+        </div>
+      </div>
+
       <p id="win-text">Všechna písmenka jsi zvládl na jedničku!</p>
-      <button id="next-level-btn" class="btn btn-primary" type="button">
-        <span>Další kolo ▶</span>
-      </button>
+      <div class="win-actions">
+        <button id="next-level-btn" class="btn btn-primary" type="button">
+          <span>Další kolo ▶</span>
+        </button>
+        <button id="win-chapters-btn" class="btn btn-secondary" type="button">
+          <span>📚 Kapitoly</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Překrytí pro výběr kapitoly -->
+  <div id="chapters-overlay" class="overlay hidden">
+    <div class="overlay-card chapters-card">
+      <div class="chapters-header">
+        <h2>📚 Kniha kapitol</h2>
+        <button id="close-chapters-btn" class="icon-btn close-btn" title="Zavřít" aria-label="Zavřít">✖</button>
+      </div>
+      <p class="chapters-subtitle">Vyber si, co si chceš procvičit:</p>
+      <div class="chapters-list" id="chapters-list">
+        <!-- Generováno dynamicky v JS podle odemčení -->
+      </div>
     </div>
   </div>
 
@@ -45,6 +74,10 @@
     <!-- Horní lišta se stavem a ovládáním -->
     <header class="game-header">
       <div class="header-status">
+        <button id="chapters-btn" class="chapters-btn" title="Vybrat kapitolu" aria-label="Kapitoly">
+          <span class="chapters-icon">📚</span>
+          <span class="chapters-label">Kapitoly</span>
+        </button>
         <div class="level-badge" id="level-indicator">Kolo 1: Samohlásky</div>
         <div class="stars-badge" id="stars-badge" title="Získané hvězdičky" aria-label="Získané hvězdičky">
           <div class="stars-list" id="stars-list"></div>

@@ -67,6 +67,32 @@ body {
   flex-wrap: wrap;
 }
 
+.chapters-btn {
+  background: #ffffff;
+  border: 3px solid #ffd43b;
+  border-radius: var(--border-radius-md);
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: #d9480f;
+  box-shadow: var(--shadow-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.chapters-btn:hover {
+  transform: scale(1.05);
+  background: #fff9db;
+}
+
+.chapters-btn:active {
+  transform: scale(0.95);
+}
+
 .level-badge {
   background: #ffffff;
   padding: 6px 14px;
@@ -397,6 +423,20 @@ body {
   padding: 12px;
   border-radius: var(--border-radius-lg);
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: opacity 0.25s ease;
+}
+
+/* Zamknutá a zašedlá nabídka během čtení textu */
+.letters-rack.is-locked {
+  pointer-events: none;
+}
+
+.letters-rack.is-locked .letter-card {
+  opacity: 0.42;
+  filter: grayscale(65%);
+  cursor: not-allowed;
+  transform: scale(0.96);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
 }
 
 .letter-card {
@@ -415,8 +455,27 @@ body {
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
+}
+
+/* Karta se slovem ve větných kolech */
+.letter-card.word-card {
+  width: auto;
+  min-width: 90px;
+  height: 56px;
+  padding: 0 18px;
+  font-size: 1.45rem;
+  letter-spacing: 0.5px;
+}
+
+/* Sloty pro celá slova ve větách */
+.word-slot.sentence-slot {
+  width: auto;
+  min-width: 82px;
+  height: 48px;
+  padding: 0 12px;
+  font-size: 1.35rem;
 }
 
 .letter-card:hover {
@@ -530,6 +589,184 @@ body {
 .btn-primary {
   background: linear-gradient(135deg, #ff6b6b 0%, #fa5252 100%);
   color: #ffffff;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  border: 3px solid #dee2e6;
+  color: #495057;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-secondary:hover {
+  background: #f1f3f5;
+  border-color: #ced4da;
+}
+
+.win-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Banner s výzvou k hlasitému přečtení */
+.read-aloud-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #e7f5ff 0%, #d0ebff 100%);
+  border: 3px solid #748ffc;
+  border-radius: var(--border-radius-md);
+  padding: 12px 18px;
+  margin-bottom: 16px;
+  animation: popIn 0.3s ease;
+}
+
+.read-aloud-banner.hidden {
+  display: none;
+}
+
+.read-aloud-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.read-aloud-body {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.read-aloud-label {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #4c6ef5;
+}
+
+.read-aloud-text {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #364fc7;
+  letter-spacing: 0.8px;
+}
+
+/* Kapitoly – Kniha kapitol */
+.chapters-card {
+  max-width: 500px;
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 24px 22px;
+}
+
+.chapters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.chapters-header h2 {
+  font-size: 1.65rem;
+  color: var(--text-color);
+  margin-bottom: 0;
+}
+
+.close-btn {
+  width: 38px;
+  height: 38px;
+  font-size: 1.1rem;
+}
+
+.chapters-subtitle {
+  color: var(--text-muted);
+  font-size: 0.98rem;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chapter-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  border-radius: var(--border-radius-md);
+  padding: 12px 16px;
+  text-align: left;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.chapter-item.unlocked {
+  cursor: pointer;
+}
+
+.chapter-item.unlocked:hover {
+  transform: translateY(-2px);
+  border-color: #ffd43b;
+  background: #fff9db;
+  box-shadow: 0 8px 18px rgba(255, 212, 59, 0.28);
+}
+
+.chapter-item.current {
+  border-color: #ff6b6b;
+  background: #fff5f5;
+  box-shadow: 0 0 0 2px #ff6b6b;
+}
+
+.chapter-item.locked {
+  opacity: 0.52;
+  filter: grayscale(75%);
+  cursor: not-allowed;
+  background: #f1f3f5;
+}
+
+.chapter-emoji {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.chapter-info {
+  flex: 1;
+}
+
+.chapter-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--text-color);
+  margin-bottom: 2px;
+}
+
+.chapter-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.chapter-action-badge {
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: #e7f5ff;
+  color: #1971c2;
+  white-space: nowrap;
+}
+
+.chapter-item.current .chapter-action-badge {
+  background: #ffe3e3;
+  color: #e03131;
+}
+
+.chapter-item.locked .chapter-action-badge {
+  background: #ced4da;
+  color: #495057;
 }
 
 .btn:hover {
@@ -724,6 +961,20 @@ body {
     height: 36px;
     font-size: 1.25rem;
     border-radius: 10px;
+  }
+
+  .letter-card.word-card {
+    min-width: 76px;
+    height: 48px;
+    padding: 0 12px;
+    font-size: 1.2rem;
+  }
+
+  .word-slot.sentence-slot {
+    min-width: 70px;
+    height: 40px;
+    font-size: 1.15rem;
+    padding: 0 8px;
   }
 }
 
